@@ -48,7 +48,7 @@ class Loading extends Component {
   }
   render() {
     return (
-      <div styles={styles.container}>
+      <div style={styles.container}>
         <h1 style={styles.content}>{this.state.text}</h1>
       </div>
     );
