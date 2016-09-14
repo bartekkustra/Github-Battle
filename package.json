@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "webpack",
     "start": "webpack-dev-server",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && webpack",
+    "deploy": "npm run build && gh-pages -d dist -m \"Updates --skip-ci\"",
     "prod": "webpack -p"
   },
   "author": "Bart Kustra <bartekkustra@gmail.com> (http://twitter.com/nosekbk) based on Tyler McGinnis <tylermcginnis33@gmail.com> (http://tylermcginnis.com) tutorial",
