@@ -20,8 +20,8 @@ Raven.config(sentryUrl, {
     }
 }).install()
 
-window.onerror = function () {
-    Raven.showReportDialog()
-}
+// window.onerror = function () {
+//     Raven.showReportDialog()
+// }
 
 ReactDOM.render(routes, document.getElementById('app'));
