@@ -88,8 +88,6 @@
 	    }
 	}).install();
 	
-	console.log(window.whatis.that);
-	
 	// window.onerror = function () {
 	//     Raven.showReportDialog()
 	// }
