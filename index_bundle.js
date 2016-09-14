@@ -88,9 +88,11 @@
 	    }
 	}).install();
 	
-	window.onerror = function () {
-	    _ravenJs2.default.showReportDialog();
-	};
+	console.log(window.whatis.that);
+	
+	// window.onerror = function () {
+	//     Raven.showReportDialog()
+	// }
 	
 	_reactDom2.default.render(_routes2.default, document.getElementById('app'));
 
