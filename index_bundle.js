@@ -28532,7 +28532,8 @@
 	    var _this = _possibleConstructorReturn(this, (PromptContainer.__proto__ || Object.getPrototypeOf(PromptContainer)).call(this, props, context));
 	
 	    _this.state = {
-	      username: ''
+	      username: '',
+	      errorMessage: null
 	    };
 	    context.router;
 	
@@ -28546,26 +28547,37 @@
 	    value: function handleSubmitUser(e) {
 	      e.preventDefault();
 	      var username = this.state.username;
-	      this.setState({
-	        username: ''
-	      });
-	      if (this.props.routeParams.playerOne) {
-	        this.context.router.push({
-	          pathname: '/battle',
-	          query: {
-	            playerOne: this.props.routeParams.playerOne,
-	            playerTwo: this.state.username
-	          }
+	      if (username === '') {
+	        this.setState({
+	          errorMessage: 'Missing username'
 	        });
 	      } else {
-	        this.context.router.push('/playerTwo/' + this.state.username);
+	        this.setState({
+	          username: ''
+	        });
+	        if (this.props.routeParams.playerOne) {
+	          this.context.router.push({
+	            pathname: '/battle',
+	            query: {
+	              playerOne: this.props.routeParams.playerOne,
+	              playerTwo: this.state.username
+	            }
+	          });
+	        } else {
+	          this.context.router.push('/playerTwo/' + this.state.username);
+	        }
 	      }
 	    }
 	  }, {
 	    key: 'handleUpdateUser',
 	    value: function handleUpdateUser(event) {
+	      var current = event.target.value;
+	      current = current.replace(/[^a-zA-Z0-9]/g, "");
+	
+	      current !== '' ? this.setState({ errorMessage: null }) : this.setState({ errorMessage: 'Missing username' });
+	
 	      this.setState({
-	        username: event.target.value
+	        username: current
 	      });
 	    }
 	  }, {
@@ -28575,7 +28587,8 @@
 	        onSubmitUser: this.handleSubmitUser,
 	        onUpdateUser: this.handleUpdateUser,
 	        header: this.props.route.header,
-	        username: this.state.username });
+	        username: this.state.username,
+	        errorMessage: this.state.errorMessage });
 	    }
 	  }]);
 	
@@ -28598,6 +28611,8 @@
 	  value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -28608,52 +28623,79 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function Prompt(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'jumbotron col-sm-6 col-sm-offset-3 text-center', style: _styles2.default.transparentBg },
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      props.header
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'col-sm-12' },
-	      _react2.default.createElement(
-	        'form',
-	        { onSubmit: props.onSubmitUser },
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Prompt = function (_Component) {
+	  _inherits(Prompt, _Component);
+	
+	  function Prompt() {
+	    _classCallCheck(this, Prompt);
+	
+	    return _possibleConstructorReturn(this, (Prompt.__proto__ || Object.getPrototypeOf(Prompt)).apply(this, arguments));
+	  }
+	
+	  _createClass(Prompt, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'jumbotron col-sm-6 col-sm-offset-3 text-center', style: _styles2.default.transparentBg },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'form-group' },
-	          _react2.default.createElement('input', {
-	            className: 'form-control',
-	            onChange: props.onUpdateUser,
-	            placeholder: 'Github Username',
-	            type: 'text',
-	            value: props.username })
+	          'h1',
+	          null,
+	          this.props.header
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'form-group col-sm-4 col-sm-offset-4' },
+	          { className: 'lead', style: { color: 'red' } },
+	          this.props.errorMessage
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-sm-12' },
 	          _react2.default.createElement(
-	            'button',
-	            {
-	              className: 'btn btn-block btn-success',
-	              type: 'submit' },
-	            'Continue'
+	            'form',
+	            { onSubmit: this.props.onSubmitUser },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-group' },
+	              _react2.default.createElement('input', {
+	                className: 'form-control',
+	                onChange: this.props.onUpdateUser,
+	                placeholder: 'Github Username',
+	                type: 'text',
+	                value: this.props.username })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-group col-sm-4 col-sm-offset-4' },
+	              _react2.default.createElement(
+	                'button',
+	                {
+	                  className: 'btn btn-block btn-success',
+	                  type: 'submit' },
+	                'Continue'
+	              )
+	            )
 	          )
 	        )
-	      )
-	    )
-	  );
-	}
+	      );
+	    }
+	  }]);
+	
+	  return Prompt;
+	}(_react.Component);
 	
 	Prompt.propTypes = {
 	  onSubmitUser: _react.PropTypes.func.isRequired,
 	  onUpdateUser: _react.PropTypes.func.isRequired,
 	  header: _react.PropTypes.string.isRequired,
-	  username: _react.PropTypes.string.isRequired
+	  username: _react.PropTypes.string.isRequired,
+	  errorMessage: _react.PropTypes.string
 	};
 	
 	exports.default = Prompt;
