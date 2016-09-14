@@ -77,8 +77,8 @@
 	
 	var _APP_INFO = {
 	    name: 'Github Battle',
-	    branch: 'sentry',
-	    version: '1.0'
+	    branch: 'fix-empty-inputs',
+	    version: '1.1'
 	};
 	
 	_ravenJs2.default.config(sentryUrl, {
