@@ -6,7 +6,8 @@ class PromptContainer extends Component {
     super(props, context)
     
     this.state = {
-      username: ''
+      username: '',
+      errorMessage: null
     }
     context.router
 
@@ -16,27 +17,40 @@ class PromptContainer extends Component {
 
   handleSubmitUser (e) {
     e.preventDefault();
-    var username = this.state.username;
-    this.setState({
-      username: ''
-    });
-    if (this.props.routeParams.playerOne) {
-      this.context.router.push({
-        pathname: '/battle',
-        query: {
-          playerOne: this.props.routeParams.playerOne,
-          playerTwo: this.state.username,
-        }
+    var username = this.state.username
+    if (username === '') {
+      this.setState({
+        errorMessage: 'Missing username'
       })
     } else {
-      this.context.router.push('/playerTwo/' + this.state.username)
+      this.setState({
+        username: ''
+      });
+      if (this.props.routeParams.playerOne) {
+        this.context.router.push({
+          pathname: '/battle',
+          query: {
+            playerOne: this.props.routeParams.playerOne,
+            playerTwo: this.state.username,
+          }
+        })
+      } else {
+        this.context.router.push('/playerTwo/' + this.state.username)
+      }
     }
   }
 
   handleUpdateUser (event) {
+    var current = event.target.value
+    current = current.replace(/[^a-zA-Z0-9]/g,"")
+
+    current !== ''
+      ? this.setState({ errorMessage: null })
+      : this.setState({ errorMessage: 'Missing username' })
+
     this.setState({
-      username: event.target.value
-    });
+      username: current
+    })
   }
 
   render() {
@@ -45,7 +59,8 @@ class PromptContainer extends Component {
         onSubmitUser={this.handleSubmitUser}
         onUpdateUser={this.handleUpdateUser}
         header={this.props.route.header}
-        username={this.state.username} />
+        username={this.state.username} 
+        errorMessage={this.state.errorMessage} />
     )
   }
 }
