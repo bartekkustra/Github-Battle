@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {transparentBg} from '../styles'
+import React, {Component} from 'react'
+import styles from '../styles'
 
 function MainContainer ({children}) {
   return (
@@ -9,4 +9,4 @@ function MainContainer ({children}) {
   )
 }
 
-export default MainContainer;
+export default MainContainer

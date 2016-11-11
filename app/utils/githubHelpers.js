@@ -14,7 +14,7 @@ function getRepos (username = 'bartekkustra') {
 }
 
 function getTotalStars (repos) {
-  return repos.data.reduce(function (prev, current) {
+  return repos.data.reduce((prev, current) => {
     return prev + current.stargazers_count
   }, 0)
 }
@@ -22,7 +22,7 @@ function getTotalStars (repos) {
 function getPlayersData (player) {
   return getRepos(player.login)
     .then(getTotalStars)
-    .then(function (totalStars) {
+    .then((totalStars) => {
       return {
         followers: player.followers,
         totalStars
@@ -37,35 +37,35 @@ function calculateScores (players) {
   ]
 }
 
-var helpers = {
-  getPlayersInfo: function (players) {
-    return axios.all(players.map(function (username) {
+const helpers = {
+  getPlayersInfo: (players) => {
+    return axios.all(players.map((username) => {
       return getUserInfo(username)
     }))
-    .then(function (info) {
-      return info.map(function (user) {
+    .then((info) => {
+      return info.map((user) => {
         return user.data
       })
     })
-    .catch(function (error) {
+    .catch((error) => {
       return logCustomMessage(error.statusText, {
         players: players,
         error: error
       })
     })
   },
-  battle: function (players) {
-    var playerOneData = getPlayersData(players[0]);
-    var playerTwoData = getPlayersData(players[1]);
+  battle: (players) => {
+    const playerOneData = getPlayersData(players[0])
+    const playerTwoData = getPlayersData(players[1])
     return axios.all([playerOneData, playerTwoData])
       .then(calculateScores)
-      .catch(function (error) {
+      .catch((error) => {
         return logCustomMessage(error.statusText, {
           players: players,
           error: error
         })
       })
   }
-};
+}
 
-module.exports = helpers;
+module.exports = helpers

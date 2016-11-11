@@ -36,8 +36,8 @@ function Results ({isLoading, scores, playersInfo}) {
     )
   }
 
-  var winningIndex = scores[0] > scores[1] ? 0 : 1
-  var losingIndex = winningIndex === 0 ? 1 : 0
+  const winningIndex = scores[0] > scores[1] ? 0 : 1
+  const losingIndex = winningIndex === 0 ? 1 : 0
 
   return (
     <MainContainer>
