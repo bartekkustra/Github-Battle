@@ -26,16 +26,17 @@ class PromptContainer extends Component {
       this.setState({
         username: ''
       });
-      if (this.props.routeParams.playerOne) {
+      const { playerOne } = this.props.routeParams
+      if (playerOne) {
         this.context.router.push({
           pathname: '/battle',
           query: {
-            playerOne: this.props.routeParams.playerOne,
-            playerTwo: this.state.username,
+            playerOne,
+            playerTwo: username,
           }
         })
       } else {
-        this.context.router.push('/playerTwo/' + this.state.username)
+        this.context.router.push(`/playerTwo/${username}`)
       }
     }
   }

@@ -3,14 +3,14 @@ import logCustomMessage from './logCustomMessage'
 
 var id = "YOUR_CLIENT_ID";
 var sec = "YOUR_SECRET_ID";
-var param = "?client_id=" + id + "&client_secret=" + sec;
+var param = `?client_id=${id}&client_secret=${sec}`;
 
-function getUserInfo (username) {
-  return axios.get('https://api.github.com/users/' + username + param);
+function getUserInfo (username = 'bartekkustra') {
+  return axios.get(`https://api.github.com/users/${username + param}`);
 }
 
-function getRepos (username) {
-  return axios.get('https://api.github.com/users/' + username + '/repos' + param + '&per_page=100');
+function getRepos (username = 'bartekkustra') {
+  return axios.get(`https://api.github.com/users/${username}/repos${param}&per_page=100`);
 }
 
 function getTotalStars (repos) {
@@ -25,7 +25,7 @@ function getPlayersData (player) {
     .then(function (totalStars) {
       return {
         followers: player.followers,
-        totalStars: totalStars
+        totalStars
       }
     })
 }
