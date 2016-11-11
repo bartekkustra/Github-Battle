@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import Results from '../components/Results'
 import { battle } from '../utils/githubHelpers'
 
 class ResultsContainer extends Component {
-  constructor(props) {
-    super(props)
+  constructor (props) {
+    super (props)
 
     this.state = {
       isLoading: true,

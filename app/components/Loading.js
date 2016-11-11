@@ -1,25 +1,9 @@
 import React, {PropTypes, Component} from 'react'
-
-var styles = {
-  container: {
-    position: 'fixed',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    fontSize: '55px'
-  },
-  content: {
-    textAlign: 'center',
-    position: 'absolute',
-    width: '100%',
-    marginTop: '30px',
-  }
-}
+import styles from '../styles'
 
 class Loading extends Component {
-  constructor(props) {
-    super(props)
+  constructor (props) {
+    super (props)
     
     this.originalText = this.props.text
 
@@ -28,9 +12,9 @@ class Loading extends Component {
     }
   }
 
-  componentDidMount() {
-    var stopper = this.originalText + '...'
-    this.interval = setInterval(function() {
+  componentDidMount () {
+    const stopper = this.originalText + '...'
+    this.interval = setInterval(() => {
       if (this.state.text === stopper) {
         this.setState({
           text: this.originalText
@@ -40,10 +24,10 @@ class Loading extends Component {
           text: this.state.text + '.'
         })
       }
-    }.bind(this), this.props.speed)
+    }, this.props.speed)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     clearInterval(this.interval)
   }
   render() {
@@ -51,7 +35,7 @@ class Loading extends Component {
       <div style={styles.container}>
         <h1 style={styles.content}>{this.state.text}</h1>
       </div>
-    );
+    )
   }
 }
 
