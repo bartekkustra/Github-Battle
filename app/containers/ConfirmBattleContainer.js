@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ConfirmBattle from '../components/ConfirmBattle'
-import githubHelpers from '../utils/githubHelpers'
+import { getPlayersInfo } from '../utils/githubHelpers'
 
 class ConfirmBattleContainer extends Component {
   constructor (props, context) {
@@ -15,15 +15,17 @@ class ConfirmBattleContainer extends Component {
     this.handleInitiateBattle = this.handleInitiateBattle.bind(this)
   }
 
-  componentDidMount () {
-    const query = this.props.location.query
-    githubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
-      .then((players) => {
-        this.setState({
-          isLoading: false,
-          playersInfo: [players[0], players[1]]
-        })
+  async componentDidMount () {
+    const { query } = this.props.location
+    try {
+      const players = await getPlayersInfo([query.playerOne, query.playerTwo])
+      this.setState({
+        isLoading: false,
+        playersInfo: [players[0], players[1]]
       })
+    } catch (error) {
+      console.warn('Error in ConfirmBattleContainer', error)
+    }
   }
 
   handleInitiateBattle () {
