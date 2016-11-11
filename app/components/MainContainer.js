@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import styles from '../styles'
+import {transparentBg} from '../styles'
 
 function MainContainer ({children}) {
   return (
