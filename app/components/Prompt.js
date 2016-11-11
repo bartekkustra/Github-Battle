@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react'
-import styles from '../styles'
+import {transparentBg} from '../styles'
 
 class Prompt extends Component {
   render() {
     return (
-      <div className="jumbotron col-sm-6 col-sm-offset-3 text-center" style={styles.transparentBg}>
+      <div className="jumbotron col-sm-6 col-sm-offset-3 text-center" style={transparentBg}>
         <h1>{this.props.header}</h1>
         <div className="col-sm-12">
           <form onSubmit={this.props.onSubmitUser}>
