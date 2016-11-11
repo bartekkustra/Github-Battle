@@ -36,8 +36,8 @@ function Results (props) {
     )
   }
 
-  var winningIndex = props.scores[0] > props.scores[1] ? 0 : 1
-  var losingIndex = winningIndex === 0 ? 1 : 0
+  const winningIndex = props.scores[0] > props.scores[1] ? 0 : 1
+  const losingIndex = winningIndex === 0 ? 1 : 0
 
   return (
     <MainContainer>

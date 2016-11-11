@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import Results from '../components/Results'
 import githubHelpers from '../utils/githubHelpers'
 
 class ResultsContainer extends Component {
-  constructor(props) {
-    super(props)
+  constructor (props) {
+    super (props)
 
     this.state = {
       isLoading: true,
@@ -14,12 +14,12 @@ class ResultsContainer extends Component {
   
   componentDidMount () {
     githubHelpers.battle(this.props.location.state.playersInfo)
-    .then(function (scores) {
+    .then((scores) => {
       this.setState({
         scores: scores,
         isLoading: false
       })
-    }.bind(this))
+    })
   }
   render() {
     return (

@@ -3,8 +3,8 @@ import ConfirmBattle from '../components/ConfirmBattle'
 import githubHelpers from '../utils/githubHelpers'
 
 class ConfirmBattleContainer extends Component {
-  constructor(props, context) {
-    super(props, context)
+  constructor (props, context) {
+    super (props, context)
 
     this.state = {
       isLoading: true,
@@ -16,14 +16,14 @@ class ConfirmBattleContainer extends Component {
   }
 
   componentDidMount () {
-    var query = this.props.location.query;
+    const query = this.props.location.query
     githubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
-      .then(function (players) {
+      .then((players) => {
         this.setState({
           isLoading: false,
           playersInfo: [players[0], players[1]]
         })
-      }.bind(this))
+      })
   }
 
   handleInitiateBattle () {
@@ -48,4 +48,4 @@ ConfirmBattleContainer.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default ConfirmBattleContainer;
+export default ConfirmBattleContainer

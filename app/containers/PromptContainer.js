@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import Prompt from '../components/Prompt'
 
 class PromptContainer extends Component {
-  constructor(props, context) {
-    super(props, context)
+  constructor (props, context) {
+    super (props, context)
     
     this.state = {
       username: '',
@@ -16,8 +16,8 @@ class PromptContainer extends Component {
   }
 
   handleSubmitUser (e) {
-    e.preventDefault();
-    var username = this.state.username
+    e.preventDefault()
+    const username = this.state.username
     if (username === '') {
       this.setState({
         errorMessage: 'Missing username'
@@ -25,7 +25,7 @@ class PromptContainer extends Component {
     } else {
       this.setState({
         username: ''
-      });
+      })
       if (this.props.routeParams.playerOne) {
         this.context.router.push({
           pathname: '/battle',
@@ -41,7 +41,7 @@ class PromptContainer extends Component {
   }
 
   handleUpdateUser (event) {
-    var current = event.target.value
+    let current = event.target.value
     current = current.replace(/[^a-zA-Z0-9]/g,"")
 
     current !== ''

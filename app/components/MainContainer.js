@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import styles from '../styles'
 
 function MainContainer (props) {
@@ -9,4 +9,4 @@ function MainContainer (props) {
   )
 }
 
-export default MainContainer;
+export default MainContainer
