@@ -39,35 +39,32 @@ function calculateScores (players) {
   ]
 }
 
-const helpers = {
-  getPlayersInfo: (players) => {
-    return axios.all(players.map((username) => {
-      return getUserInfo(username)
-    }))
-    .then((info) => {
-      return info.map((user) => {
-        return user.data
-      })
+export function getPlayersInfo (players) {
+  return axios.all(players.map((username) => {
+    return getUserInfo(username)
+  }))
+  .then((info) => {
+    return info.map((user) => {
+      return user.data
     })
+  })
+  .catch((error) => {
+    return logCustomMessage(error.statusText, {
+      players: players,
+      error: error
+    })
+  })
+}
+
+export function battle (players) {
+  const playerOneData = getPlayersData(players[0])
+  const playerTwoData = getPlayersData(players[1])
+  return axios.all([playerOneData, playerTwoData])
+    .then(calculateScores)
     .catch((error) => {
       return logCustomMessage(error.statusText, {
         players: players,
         error: error
       })
     })
-  },
-  battle: (players) => {
-    const playerOneData = getPlayersData(players[0])
-    const playerTwoData = getPlayersData(players[1])
-    return axios.all([playerOneData, playerTwoData])
-      .then(calculateScores)
-      .catch((error) => {
-        return logCustomMessage(error.statusText, {
-          players: players,
-          error: error
-        })
-      })
-  }
 }
-
-export default helpers
