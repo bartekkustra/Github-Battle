@@ -19,15 +19,17 @@ function getTotalStars (repos) {
   }, 0)
 }
 
-function getPlayersData (player) {
-  return getRepos(player.login)
-    .then(getTotalStars)
-    .then(function (totalStars) {
-      return {
-        followers: player.followers,
-        totalStars: totalStars
-      }
-    })
+async function getPlayersData (player) {
+  try {
+    const repos = await getRepos(player.login)
+    const totalStars = await getTotalStars(repos)
+    return {
+      followers: player.followers,
+      totalStars
+    }
+  } catch (error) {
+    console.warn('Error in githubHelpers', error)
+  }
 }
 
 function calculateScores (players) {
