@@ -15,18 +15,16 @@ class ConfirmBattleContainer extends Component {
     this.handleInitiateBattle = this.handleInitiateBattle.bind(this)
   }
 
-  componentDidMount () {
-    async componentDidMount () {
-      const { query } = this.props.location
-      try {
-        const players = await getPlayersInfo([query.playerOne, query.playerTwo])
-        this.setState({
-          isLoading: false,
-          playersInfo: [players[0], players[1]]
-        })
-      } catch (error) {
-        console.warn('Error in ConfirmBattleContainer', error)
-      }
+  async componentDidMount () {
+    const { query } = this.props.location
+    try {
+      const players = await getPlayersInfo([query.playerOne, query.playerTwo])
+      this.setState({
+        isLoading: false,
+        playersInfo: [players[0], players[1]]
+      })
+    } catch (error) {
+      console.warn('Error in ConfirmBattleContainer', error)
     }
   }
 
