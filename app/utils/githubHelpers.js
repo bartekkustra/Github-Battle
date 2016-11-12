@@ -1,5 +1,4 @@
 import axios from 'axios'
-import logCustomMessage from './logCustomMessage'
 
 var id = "YOUR_CLIENT_ID";
 var sec = "YOUR_SECRET_ID";
