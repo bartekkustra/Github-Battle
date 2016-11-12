@@ -10,7 +10,7 @@ const sentryUrl = 'https://' + sentryKey + '@sentry.io/' + sentryApp
 const _APP_INFO = {
     name: 'Github Battle',
     branch: 'sentry',
-    version: '1.0'
+    version: '1.0',
 }
 
 Raven.config(sentryUrl, {

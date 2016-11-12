@@ -37,7 +37,7 @@ Prompt.propTypes = {
   onUpdateUser: PropTypes.func.isRequired,
   header: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
-  errorMessage: PropTypes.string,
+  errorMessage: PropTypes.string
 }
 
 export default Prompt

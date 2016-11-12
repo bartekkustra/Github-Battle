@@ -3,7 +3,7 @@ var styles = {
     background: 'transparent'
   },
   space: {
-    marginTop: '25px',
+    marginTop: '25px'
   },
   container: {
     position: 'fixed',
@@ -17,7 +17,7 @@ var styles = {
     textAlign: 'center',
     position: 'absolute',
     width: '100%',
-    marginTop: '30px',
+    marginTop: '30px'
   }
 }
 

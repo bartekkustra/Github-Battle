@@ -32,7 +32,7 @@ class PromptContainer extends Component {
           pathname: '/battle',
           query: {
             playerOne,
-            playerTwo: username,
+            playerTwo: username
           }
         })
       } else {
